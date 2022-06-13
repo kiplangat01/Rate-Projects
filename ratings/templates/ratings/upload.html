@@ -1,0 +1,16 @@
+{% extends "ratings/base.html" %}
+{% block content %}
+
+<div class="col-4 mt-5">
+    <h3 class="upload-form-heading mb-2">Upload Project</h3>
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <div class="form-group mt-3">
+        <button class="btn btn-primary" type="submit">Upload Image</button>
+    </div>
+</form>
+</div>
+
+{% endblock %}

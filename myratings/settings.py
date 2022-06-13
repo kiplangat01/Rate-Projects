@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
+import cloudinary, cloudinary.api,cloudinary.uploader
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +28,12 @@ SECRET_KEY = 'django-insecure-4j&dyuc#0j57fyy(*uc5e7nk!)!&$zeor5y6*#58s11oii^rzy
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+cloudinary.config ( 
+  cloud_name = 'nobies',
+  api_key = '119444351949172', 
+  api_secret = 'TNDcDVOVJspzts-EnDYcNt0zHos'
+)
 
 
 # Application definition
@@ -82,6 +90,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Password validation
