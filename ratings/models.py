@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 class Project(models.Model):
-    photo=CloudinaryField('image')
+    picture = CloudinaryField('image')
     description=models.TextField(max_length=300)
     title=models.CharField(max_length=160)
     link=models.URLField(max_length=300)
