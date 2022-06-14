@@ -28,14 +28,14 @@ def Upload_Project(request):
             project = form.save(commit=False)
             project.user = current_user
             project.save()
-            return redirect('home')
+            return redirect('index')
     else:
         form = ProjectUploadForm()
     context = {
         "form":form
     }
 
-    return render(request,"project/project_upload.html",context)
+    return render(request,"ratings/upload.html",context)
 
 
 def Rateproject(request,pk):

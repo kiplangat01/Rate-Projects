@@ -1,15 +1,10 @@
 {% extends "ratings/base.html" %}
-
 {% block content %} 
-
 <div class="container">
     <div class="row">
-    
             {% if projects %}
             {% for project in projects %}
             <div class="col-3 ml-5 mt-5">
-            <!--card start-->
-            
                 <div class="card" style="width: 18rem;">
                     <div class="card-header">
                     <img src="{{ user.profile.picture.url }}" alt="profile picture" class="rounded-circle custom-display border border-primary" width="16%">&nbsp; &nbsp; <b>{{ project.user.username }}</b>
@@ -23,13 +18,8 @@
                     </div>
                   </div>
             </div>
-        
-            <!--card end-->
             {% endfor %}
-            {% endif %}
-        
+            {% endif %}  
     </div>
 </div>
-
-
 {% endblock %}
