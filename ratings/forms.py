@@ -5,18 +5,14 @@ from .models import Project, Ratings
 
     
 class ProjectUploadForm(forms.ModelForm):
-    '''
-    Form to allow users upload project.
-    '''
+    
     class Meta:
         model = Project
-        fields = ["title","description","link","image"]
+        fields = ["image","title", "description",  "link", "technologies"]
 
 
 class RatingUploadForm(forms.ModelForm):
-    '''
-    This class will define the form for users to rate the project
-    '''
+    
     class Meta:
         model = Ratings
-        fields = ["design","usability","content"]
+        fields = ["rates", "usability", "description"]

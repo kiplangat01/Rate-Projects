@@ -4,7 +4,7 @@ from .models import Project
 from .forms import *
 from django.shortcuts import redirect, render
 
-def Index_view(request):
+def index(request):
     '''
     View for the homepage
     '''
@@ -15,7 +15,7 @@ def Index_view(request):
         "projects":projects,
     }
     
-    return render(request,"index.html",context)
+    return render(request,"ratings/index.html",context)
 
 def Upload_Project(request):
     '''
@@ -99,4 +99,4 @@ def Rateproject(request,pk):
         "design_percent":design_percent
     }
 
-    return render(request,"project/projectrating.html",context)
+    return render(request,"ratings/projectrating.html",context)

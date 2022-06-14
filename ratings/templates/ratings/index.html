@@ -12,14 +12,14 @@
             
                 <div class="card" style="width: 18rem;">
                     <div class="card-header">
-                    <img src="{{ project.user.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-primary" width="16%">&nbsp; &nbsp; <b>{{ project.user.username }}</b>
+                    <img src="{{ user.profile.picture.url }}" alt="profile picture" class="rounded-circle custom-display border border-primary" width="16%">&nbsp; &nbsp; <b>{{ project.user.username }}</b>
                       </div>
                     <img src="{{ project.image.url }}" class="card-img-top" alt="screenshot">
                     <div class="card-body">
                       <h5 class="card-title">{{ project.title }}</h5>
-                      <p class="card-text"><i>{{ project.description }}</i></p>
-                      <a href="{{ project.link }}" class="btn btn-outline-success">Visit Site</a>
-                      <a href="{% url 'rate_project' project.id %}" class="btn btn-outline-success">Rate Site</a>
+                      <p class="card-text">{{ project.description }}</p>
+                      <a href="{{ project.link }}" class="btn btn-dark">View project</a>
+                      <a href="{% url 'rate_project' project.id %}" class="btn btn-info">Rate project</a>
                     </div>
                   </div>
             </div>
