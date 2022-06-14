@@ -1,9 +1,14 @@
 {% extends "ratings/base.html" %}
 {% block content %} 
+
+<div class="rate container-fluid text-center btn btn-info"><a href="{% url 'upload_project' %}"><h1>post a project </h1></a></div>
 <div class="container">
     <div class="row">
             {% if projects %}
             {% for project in projects %}
+
+
+
             <div class="col-3 ml-5 mt-5">
                 <div class="card" style="width: 18rem;">
                     <div class="card-header">
@@ -11,7 +16,7 @@
                       </div>
                     <img src="{{ project.image.url }}" class="card-img-top" alt="screenshot">
                     <div class="card-body">
-                      <h5 class="card-title">{{ project.title }}</h5>
+                      <h5 style="font-family: Lobster;" class="card-title">{{ project.title }}</h5>
                       <p class="card-text">{{ project.description }}</p>
                       <a href="{{ project.link }}" class="btn btn-dark">View project</a>
                       <a href="{% url 'rate_project' project.id %}" class="btn btn-info">Rate project</a>
