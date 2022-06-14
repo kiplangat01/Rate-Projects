@@ -5,8 +5,9 @@
       <div class="media">
          <img class="rounded-circle account-image" src="{{ user.profile.picture.url }}" alt="" height="150px" width="160px">
          <div class="media-body">
-             <h2 class="account-heading">{{ user.username }}</h2>
-             <p class="text-secondary">{{ user.email }}</p>
+             <h2 class="account-heading m-3 text-primary"><b> {{ user.username }} </b></h2> 
+             <h4 class="account-heading m-3">{{ user.location }}</h4>
+             <p class="text-secondary m-3">{{ user.email }}</p>
         </div>     
     </div>
     <form action="" method="POST" enctype="multipart/form-data">

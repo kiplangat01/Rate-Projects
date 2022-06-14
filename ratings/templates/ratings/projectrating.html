@@ -16,7 +16,7 @@
                     {{ form|crispy }}
                     <input type="hidden" value="{{ project.id }}" id="project_id">
                     <div class="form-group mt-3">
-                        <button class="btn btn-success" type="submit">Submit Rating</button>
+                        <button class="btn btn-dark" type="submit">Submit Rating</button>
                     </div>
                 </form>
            </div>
@@ -32,7 +32,7 @@
         <h2 class=""> Total Ratings</h2>
         <hr>
         <table class="table table-striped">
-            <thead class="thead-dark">
+            <thead class="thead bg-success text-light">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">User</th>
@@ -42,9 +42,9 @@
                 </tr>
             </thead>
             <tbody class="t-data">
-                <tr class="table-primary">
+                <tr class="table-secondary">
                     <th scope="row" ></th>
-                    <td><p><b>Total score</b></p></td>
+                    <td><p><b> Total score</b></p></td>
                     <td><p><b>{{ design_average }}</b></p></td>
                     <td><p><b>{{ usability_average }}</b></p></td>
                     <td><p><b>{{ content_average }}</b></p></td>
