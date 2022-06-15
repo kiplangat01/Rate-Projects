@@ -2,6 +2,7 @@ from operator import imod
 from django.shortcuts import render
 from .models import Project
 from .forms import *
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 def index(request):
@@ -17,6 +18,7 @@ def index(request):
     
     return render(request,"ratings/index.html",context)
 
+@login_required
 def Upload_Project(request):
     '''
     function to upload project for display
@@ -37,7 +39,7 @@ def Upload_Project(request):
 
     return render(request,"ratings/upload.html",context)
 
-
+@login_required
 def Rateproject(request,pk):
     '''
     Display a single projrct and  provide ratings for it.
