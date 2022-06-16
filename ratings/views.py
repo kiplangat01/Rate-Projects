@@ -25,7 +25,7 @@ def searchproject(request):
     return render(request, 'search.html')
 
 @login_required(login_url='log_user')   
-def addProject(request):
+def add_Project(request):
     current_user = request.user
     user_profile = Profile.objects.get(user = current_user)
     if request.method == 'POST':
@@ -34,14 +34,14 @@ def addProject(request):
             newProj = form.save(commit = False)
             newProj.user = user_profile
             newProj.save()
-        return redirect('home')  
+        return redirect('index')  
     else:
         form = projectForm()
-    return render(request,'newProject.html',{'form':form})    
+    return render(request,'ratings/upload.html',{'form':form})    
 
 def projects(request,id):
     proj = Project.objects.get(id = id)
-    return render(request,'readmore.html',{"projects":proj})
+    return render(request,'/readmore.html',{"projects":proj})
 
 
 @login_required(login_url='log_user')   
@@ -56,7 +56,7 @@ def rate(request,id):
             rate.user = user
             rate.projects = project
             rate.save()
-            return redirect('home')
+            return redirect('index')
     else:
         form = RateForm()
-    return render(request,"rate.html",{"form":form,"project":project})     
+    return render(request,"ratings/projectrating.html",{"form":form,"project":project})     
