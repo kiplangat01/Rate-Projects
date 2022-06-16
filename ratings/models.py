@@ -7,48 +7,46 @@ from django.contrib.auth.models import User
 
 
 class Project(models.Model):
-    image = CloudinaryField('image')
-    title = models.CharField(max_length=160)
+    title = models.CharField(max_length=30)
     description = models.TextField(max_length=300)
-    link = models.URLField(max_length=300)
-    technologies = models.CharField(max_length=200,blank=True)
-    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
-    date_posted = models.DateTimeField(default=timezone.now)
+    projectimage = CloudinaryField('images')
+    projecturl= models.URLField(max_length=200)
+    datecreated= models.DateField(auto_now_add=True )
 
-    def __str__(self):
-        return f'{self.user.username} {self.title} Project'
+    def save_projects(self):
+        self.user
 
+    def delete_projects(self):
+        self.delete()    
+
+
+    @classmethod
+    def search_projects(cls, name):
+        return cls.objects.filter(title__icontains=name).all()
+
+RATE_CHOICES = [
+(1,'1- Trash'),
+(2,'2- Horrible'),
+(3,'3- Terrible'),
+(4,'4- Bad'),
+(5,'5- Ok'),
+(6,'6- Watchable'),
+(7,'7- Good'),
+(8,'8- Very Good'),
+(9,'9- perfect'),
+(10,'10- Master Piece'),
+]
+
+class Rating(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    projects = models.ForeignKey(Project,on_delete = models.CASCADE, related_name='reviews')
+    date = models.DateField(auto_now_add=True)
+    text = models.TextField(max_length=5000,blank=True)
+    design = models.PositiveSmallIntegerField(choices = RATE_CHOICES,default= 0)
+    usability = models.PositiveSmallIntegerField(choices = RATE_CHOICES,default = 0)
+    content = models.PositiveSmallIntegerField(choices = RATE_CHOICES,default = 0)
     
 
 
     def __str__(self):
-        return f'{self.title}'
-
-    def save_post(self):
-        self.save()
-
-    def delete_post(self):
-        self.delete()
-
-    @classmethod
-    def all_posts(cls):
-        return cls.objects.all()
-
-
-    @classmethod
-    def search_projects(cls,title):
-        return cls.objects.filter(title__icontains=title).all()
-
-
-
-
-
-class Ratings(models.Model):
-    rates = models.IntegerField(choices=[(i,i) for i in range(1,11)])
-    usability = models.IntegerField(choices=[(i,i) for i in range(1,11)])
-    description = models.IntegerField(choices=[(i,i) for i in range(1,11)])
-    project = models.ForeignKey(Project,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE) 
-
-    def _str_(self):
-        return f'{self.user.username} {self.project.title} Rating'
+        return self.user.username
