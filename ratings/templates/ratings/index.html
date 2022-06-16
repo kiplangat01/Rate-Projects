@@ -1,20 +1,18 @@
 <div class="" style="font-family: 'Jost', sans-serif;">
-  {%extends 'base.html'%} {%block content%}
+  {%extends 'ratings/base.html'%} {%block content%}
   <div class="container-fluid">
 
-      <div class="jumbotron jumbotron-fluid" style="background-color: #e1c699;">
-          <div class="container">
-              <h2 class="display-4">The P-Hub</h2>
-              <p class="lead text-dark">Check out other peoples projects, Review and Rate them! You can also post yours to be reviewed!
-              </p>
-          </div>
-      </div>
+      
+          <div class="rate container-fluid text-center btn btn-info"><a href="{% url 'project' %}"><h1>post a project </h1></a></div>
+
+
       <h3 class="text-center">Projects</h3>
       <div class="row">
           {% for proj in projects %}
           <div class="col-md-4">
               <div class="card shadow">
                   <div class="view view-cascade overlay">
+                    <small class="me-2">{{proj.datecreated}}</small>
                       <img src="{{proj.projectimage.url}}" class="img-fluid w-100 rounded" alt="" style="aspect-ratio: 1;">
                       <a href="projects/{{proj.id}}">
                           <div class="mask rgba-white-slight"></div>
@@ -22,9 +20,10 @@
                   </div>
                   <div class="card-body">
                       <div class="row">
+                        
                           <h5 class="col-md-6" style="color:#4b1223 ;">{{proj.title}}</h5>
                           <div class="col-md-6">
-                              <p> <a href="{{ project.link }}">rateproject</a></p>
+                              <p> <a href="projects/{{proj.id}}">Readmore</a></p>
                           </div>
                       </div>
 
@@ -38,8 +37,8 @@
                           </div>
                           {% endfor %} {% endif %}
                           <div>
-                              <small class="me-2">Posted by:{{proj.user}}</small>
-                              <small class="me-2">Created on:{{proj.datecreated}}</small>
+                              <small class="me-2">Posted by:{{projects.user}}</small>
+                              
 
                           </div>
                       </div>
@@ -58,6 +57,8 @@
 
 
 
-<!-- <a href="{{ project.link }}" class="btn btn-dark">View project</a> -->
 
-<!-- <a href="{% url 'rate' project.id %}" class="btn btn-info">Rate project</a> -->
+
+
+
+<div class="rate container-fluid text-center btn btn-info"><a href="{% url 'upload_project' %}"><h1>post a project </h1></a></div>
