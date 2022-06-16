@@ -1,17 +1,31 @@
-{% extends "ratings/base.html" %}
-{% load crispy_forms_tags %}
-{% block content %}
+<div class="" style="font-family: 'Jost', sans-serif;">
+    {%extends "ratings/base.html"%} {% load bootstrap4 %} {% block content %}
+    <div class="container" style="font-family: 'Jost', sans-serif;">
+        <div class="row">
 
-<div class="col-4 mt-5">
-    <h3 class="upload-form-heading mb-2">Upload Project</h3>
-    <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form|crispy }}
+            <div class="col-md-6 mx-auto card p-5 mt-5">
+                <div class="panel panel-default">
 
-    <div class="form-group mt-3">
-        <button class="btn btn-primary" type="submit">Upload Image</button>
+                    <div class="panel-heading">
+                        <h3 class="text-center">Add Project</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <form action="{%url 'project' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %} {% bootstrap_form form %}
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Post">
+                            </div>
+                            <input type="hidden" name="next" value="{{next}}">
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-</form>
-</div>
 
-{% endblock %}
+    {% endblock %}
+</div>
