@@ -1,5 +1,5 @@
 <div class="class" style="font-family: 'Jost', sans-serif;">
-    {% extends 'base.html'%} {% load ratings %} {%block content%}
+    {% extends 'ratings/base.html'%}  {%block content%}
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm">
@@ -14,9 +14,9 @@
                 <!-- Card content -->
                 <div class="card-body card-body-cascade text-center">
 
-                    <!-- Title -->
+                    
                     <h4 class="card-title"><strong>{{projects.title}}</strong></h4>
-                    <!-- Subtitle -->
+                   
                     <h6 class="font-weight-bold indigo-text py-2">Description</h6>
                     <!-- Text -->
                     <p class="card-text">{{projects.description}}
@@ -33,16 +33,16 @@
             <div class="row">
                 <div class="col-sm">
                     <h4>Usability</h4>
-                    {% ratings projects %}
+                    
                     <h4>Usability</h4>
                 </div>
                 <div class="col-sm">
                     <h4>Design</h4>
-                    {% ratings projects %}
+                  
                 </div>
                 <div class="col-sm">
                     <h4>Content</h4>
-                    {% ratings projects %}
+                  
                 </div>
             </div>
             <a href="{% url 'rate' projects.id %} " class="h4 " style="background-color:#4b1223; color:white; text-decoration:none;">Review</a>
