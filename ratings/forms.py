@@ -6,12 +6,12 @@ from .models import Rating, Project
 
 
 class projectForm(forms.ModelForm):
-    class Meta:
-        model = Project
-        fields = ['title','description','projectimage','projecturl']
-    
+
+  class Meta:
+    model = Project
+    fields = ['title', 'image', 'description', 'technologies']
+
 class RateForm(forms.ModelForm):
-    
     class Meta:
         model = Rating
-        fields = ['text','design','usability','content']
+        fields = ['design', 'usability', 'content']

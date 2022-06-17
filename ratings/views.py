@@ -3,14 +3,40 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .models import *
 from users.models import Profile
-from .forms import *
+from .forms import projectForm,RateForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+import random
+
 
 def index(request):
-    projects = Project.objects.all()
-    return render(request,'ratings/index.html',{"projects":projects})
+    user = request.user
+    if request.method == "POST":
+        form = projectForm(request.POST, request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data.get('title')
+            image = request.FILES.get('image')
+            description = form.cleaned_data.get('description')
+            technologies = form.cleaned_data.get('technologies')
+            url = form.cleaned_data.get('url')
 
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+        return HttpResponseRedirect('/')
+    else:
+        form = projectForm()
+
+    try:
+        posts = Project.objects.all().order_by('-date_posted')
+        a_post = random.randint(0, len(posts)-1)
+        random_post = posts[a_post]
+        print(random_post.image)
+    except Project.DoesNotExist:
+        posts = None
+    return render(request, 'index.html', {'posts': posts, 'form': form, 'random_post': random_post})
+
+    
 def searchproject(request):
     if request.method == 'GET':
         title = request.GET.get("title")
@@ -22,25 +48,10 @@ def searchproject(request):
         return render(request, 'search.html', params)
     else:
         message = "You haven't searched for any profile"
-    return render(request, 'search.html')
-
-@login_required(login_url='log_user')   
-def add_Project(request):
-    current_user = request.user
-    user_profile = Profile.objects.get(user = current_user)
-    if request.method == 'POST':
-        form = projectForm(request.POST,request.FILES)
-        if form.is_valid:
-            newProj = form.save(commit = False)
-            newProj.user = user_profile
-            newProj.save()
-        return redirect('index')  
-    else:
-        form = projectForm()
-    return render(request,'ratings/upload.html',{'form':form})    
+    return render(request, 'results.html')
 
 
-@login_required(login_url='log_user')   
+@login_required(login_url='login')
 def project(request, post):
     post = Project.objects.get(title=post)
     ratings = Rating.objects.filter(user=request.user, post=post).first()

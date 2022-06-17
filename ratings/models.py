@@ -1,52 +1,60 @@
-from pydoc import describe
 from django.db import models
-from django.utils import timezone
-from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+import uuid
+from django.dispatch import receiver
+from django.db.models.signals import post_save, post_delete
+import datetime as dt
+from cloudinary.models import CloudinaryField
 
 
 
 class Project(models.Model):
-    title = models.CharField(max_length=30)
-    description = models.TextField(max_length=300)
-    projectimage = CloudinaryField('images')
-    projecturl= models.URLField(max_length=200)
-    datecreated= models.DateField(auto_now_add=True )
+  id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+  title = models.CharField(max_length=120, null=True, blank=False)
+  url = models.URLField(max_length=255, null=True, blank=False)
+  image = CloudinaryField('image')
+  technologies = models.CharField(max_length=200, blank=True)
+  description = models.TextField(max_length=1200, blank=False, verbose_name='Description')
+  date_posted = models.DateTimeField(auto_now_add=True)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def save_projects(self):
-        self.user
+  def __str__(self):
+    return str(self.id)
 
-    def delete_projects(self):
-        self.delete()    
+  @classmethod
+  def search_project(cls, title):
+    return cls.objects.filter(title__icontains=title)
 
+  def save_post(self):
+    self.save()
 
-    @classmethod
-    def search_projects(cls, name):
-        return cls.objects.filter(title__icontains=name).all()
+  def delete_post(self):
+      self.delete()
 
-RATE_CHOICES = [
-(1,'1- Trash'),
-(2,'2- Horrible'),
-(3,'3- Terrible'),
-(4,'4- Bad'),
-(5,'5- Ok'),
-(6,'6- Watchable'),
-(7,'7- Good'),
-(8,'8- Very Good'),
-(9,'9- perfect'),
-(10,'10- Master Piece'),
-]
+  @classmethod
+  def all_posts(cls):
+      return cls.objects.all()
 
 class Rating(models.Model):
-    user = models.ForeignKey(User,on_delete = models.CASCADE)
-    projects = models.ForeignKey(Project,on_delete = models.CASCADE, related_name='reviews')
-    date = models.DateField(auto_now_add=True)
-    text = models.TextField(max_length=5000,blank=True)
-    design = models.PositiveSmallIntegerField(choices = RATE_CHOICES,default= 0)
-    usability = models.PositiveSmallIntegerField(choices = RATE_CHOICES,default = 0)
-    content = models.PositiveSmallIntegerField(choices = RATE_CHOICES,default = 0)
-    
+  rating = (
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
+    (6, '6'),
+    (7, '7'),
+    (8, '8'),
+    (9, '9'),
+    (10, '10'),
+  )
 
-
-    def __str__(self):
-        return self.user.username
+  design = models.IntegerField(choices=rating, default=0, blank=True)
+  usability = models.IntegerField(choices=rating, blank=True)
+  content = models.IntegerField(choices=rating, blank=True)
+  score = models.FloatField(default=0, blank=True)
+  design_average = models.FloatField(default=0, blank=True)
+  usability_average = models.FloatField(default=0, blank=True)
+  content_average = models.FloatField(default=0, blank=True)
+  user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='rater')
+  post = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='ratings', null=True)

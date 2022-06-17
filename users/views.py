@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
+from .models import Profile
+from .serilizer import *
+from ratings.models import Project
+from rest_framework import viewsets
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
@@ -40,3 +44,17 @@ def profile(request):
     }
 
     return render(request, 'users/profile.html', context)
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = PostSerializer
