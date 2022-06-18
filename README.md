@@ -15,10 +15,10 @@
 
 ## Description
  
-<p>this web consisting of user jouney for dif
+<p>this web consisting of user jouney for diffent fields where user can register login and post a project then grade different projects interested
    <h5>admin credecials</h5>
    user: Kiplangat
-   password: kiplel254
+   password: testing321
 
 </p>
 
