@@ -15,7 +15,7 @@
 
 ## Description
  
-<p>this web consisting of user jouney for diffent fields where user can register login and post a project then grade different projects interested
+<p>this web consisting of user jouney for diffent fields where user can register login and post a project then grade different projects interested 
    <h5>admin credecials</h5>
    user: Kiplangat
    password: testing321
