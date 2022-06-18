@@ -15,11 +15,7 @@
 
 ## Description
  
-<p>this web consisting of user jouney for diffent fields where user can register login and post a project then grade different projects interested 
-   <h5>admin credecials</h5>
-   user: Kiplangat
-   password: testing321
-
+<p>this web consisting of user jouney for diffent fields where user can register login and post a project then grade different projects interested.
 </p>
 
 ## Installation
@@ -38,7 +34,7 @@
 
 - HTML- which was used to build the structure of the pages.
 
-- CSS - which was used to style the pages incuding the left aside navigation bar and beautiful fonts
+- CSS - which was used to style the pages incuding the left side navigation bar and beautiful fonts
 
 - django - to meet all functionalities for the entire page
 
