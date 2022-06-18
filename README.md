@@ -26,7 +26,7 @@
 
 ### Requirements
 
-- Either a computer,phone,tablet or an Ipad 
+- Either a computer,phone,tablet or an Ipad with stable internet conection
 
 - An access to the exelent Internet
 
